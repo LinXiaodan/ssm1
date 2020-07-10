@@ -13,48 +13,49 @@ import java.util.List;
 @Controller
 @RequestMapping("/paper")
 public class PaperController {
-    @Autowired
-    private PaperService paperService;
+	@Autowired
+	private PaperService paperService;
 
-    @RequestMapping("/allPaper")
-    public String list(Model model){
-        List<Paper> list = paperService.queryAllPaper();
-        System.out.println("get all paper");
-        model.addAttribute("list", list);
-        for(Paper p: list){
-            System.out.println(p.getPaperId() + "," + p.getPaperNum() + "," + p.getPaperDetail() + "," + p.getPaperName());
-        }
-        return "allPaper";
-    }
+	@RequestMapping("/allPaper")
+	public String list(Model model) {
+		List<Paper> list = paperService.queryAllPaper();
+		System.out.println("get all paper");
+		model.addAttribute("list", list);
+		for (Paper p : list) {
+			System.out.println(
+					p.getPaperId() + "," + p.getPaperNum() + "," + p.getPaperDetail() + "," + p.getPaperName());
+		}
+		return "allPaper";
+	}
 
-    @RequestMapping("toAddPaper")
-    public String toAddPaper(){
-        return "addPaper";
-    }
+	@RequestMapping("toAddPaper")
+	public String toAddPaper() {
+		return "addPaper";
+	}
 
-    @RequestMapping("/addPaper")
-    public String addPaper(Paper paper){
-        paperService.addPaper(paper);
-        return "redirect:/paper/allPaper";
-    }
+	@RequestMapping("/addPaper")
+	public String addPaper(Paper paper) {
+		paperService.addPaper(paper);
+		return "redirect:/paper/allPaper";
+	}
 
-    @RequestMapping("/del/{paperId}")
-    public String deletePaper(@PathVariable("paperId") long id){
-        paperService.deletePaperById(id);
-        return "redirect:/paper/allPaper";
-    }
+	@RequestMapping("/del/{paperId}")
+	public String deletePaper(@PathVariable("paperId") long id) {
+		paperService.deletePaperById(id);
+		return "redirect:/paper/allPaper";
+	}
 
-    @RequestMapping("toUpdatePaper")
-    public String toUpdatePaper(Model model, long id){
-        model.addAttribute("paper", paperService.queryById(id));
-        return "updatePaper";
-    }
+	@RequestMapping("toUpdatePaper")
+	public String toUpdatePaper(Model model, long id) {
+		model.addAttribute("paper", paperService.queryById(id));
+		return "updatePaper";
+	}
 
-    @RequestMapping("updatePaper")
-    public String updatePaper(Model model, Paper paper){
-        paperService.updatePaper(paper);
-        paper = paperService.queryById(paper.getPaperId());
-        model.addAttribute("paper", paper);
-        return "redirect:/paper/allPaper";
-    }
+	@RequestMapping("updatePaper")
+	public String updatePaper(Model model, Paper paper) {
+		paperService.updatePaper(paper);
+		paper = paperService.queryById(paper.getPaperId());
+		model.addAttribute("paper", paper);
+		return "redirect:/paper/allPaper";
+	}
 }

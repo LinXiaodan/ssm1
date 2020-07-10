@@ -3,7 +3,7 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.dao.PaperDao">
-    <resultMap type="Paper" id="paperResultMap" >
+    <resultMap type="Paper" id="paperResultMap">
         <id property="paperId" column="paper_id"/>
         <result property="paperName" column="name"/>
         <result property="paperNum" column="number"/>
@@ -20,7 +20,7 @@
     <update id="updatePaper" parameterType="Paper">
         UPDATE paper
         SET NAME = #{paperName},NUMBER = #{paperNum},detail = #{paperDetail}
-        WHERE  paper_id = #{paperId}
+        WHERE paper_id = #{paperId}
     </update>
 
     <select id="queryById" resultType="Paper" parameterType="long">
